@@ -55,7 +55,6 @@ The dataset analysis (result.csv) shows that for images with no hair (annotation
 The dataset analysis shows that 43 images were annotated with 0 (no hair) by all four annotators, 25 images were annotated with 1 (a little bit of hair) by all annotators, and 19 images were annotated with 2 (a lot of hair) by all annotators. This indicates a higher level of agreement among annotators when identifying images without hair compared to those with some or a lot of hair.
 
 ## TELEA method to remove the hair from picture
-Explain the TELEA method itself -> then some algorithm - delete this line(comment after)
 
 The TELEA (Fast Marching Method-based Inpainting) algorithm is a good choice for hair removal/segmentation in skin lesion analysis for several reasons.
 The algorithm fills in the missing pixels by propagating information from the surrounding known pixels in a smooth manner. This is particularly effective in cases where hair partially covers the lesion, as it avoids introducing sharp discontinuities.
@@ -63,6 +62,8 @@ Since hair strands are usually thin, removing them while preserving the underlyi
 
 Many segmentation tasks rely on accurate lesion boundaries. TELEA ensures that hair occlusions do not lead to false lesion contours, which is important for automated diagnosis and feature extraction.
 
+The TELEA method is widely used in skin lesion analysis because it effectively removes hair, noise, and other occlusions that can interfere with accurate lesion detection. In dermoscopic images, hair often covers parts of the skin lesion, making diagnosis difficult.
+TELEA efficiently fills in the missing regions after hair removal, ensuring that the lesion remains clearly visible. Unlike simple blurring or interpolation, this method preserves the natural texture and edges of the lesion, preventing distortion of important diagnostic features such as borders, colors, and patterns.
 ## Visual results
 
 **Overview:**  
