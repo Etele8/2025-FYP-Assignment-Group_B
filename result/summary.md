@@ -63,8 +63,31 @@ The first step in any inpainting method is to identify the region to be inpainte
 
 A single pixel is inpainted as a function of all other pixels lying in its known neighborhood by summing the estimates of all pixels, normalized by a weighting function. A weighting function is necessary as it ensures the inpainted pixel is influenced more by the pixels lying close to it and less by the pixels lying far away. After the boundary has been inpainted, the algorithm propagates forward towards the center of the unknown region. To implement the propagation, the Fast Marching Method (FMM) is used. FMM ensures the pixels near the known pixels are inpainted first, so that it mimics a manual inpainting technique. 
 
-## What is the advantage of using FMM in TELEA
-The FMM’s main advantage is that it explicitly maintains a narrow band that separates the known from the unknown image area and specifies which pixel to inpaint next.
+## What are the advantages of using FMM in TELEA
+The FMM explicitly maintains a narrow band that separates the known from the unknown image area and specifies which pixel to inpaint next.
+
+Efficient Propagation – FMM efficiently propagates information outward from known regions to unknown regions, ensuring a smooth inpainting process.
+
+Speed – FMM is faster than traditional iterative methods since it follows a priority-driven approach, making it well-suited for real-time applications.
+
+Accuracy – It helps maintain edge continuity and structure while filling missing regions by propagating pixel values based on their distance to the known region.
+
+Stable Computation – Unlike purely iterative approaches that may introduce noise, FMM ensures a stable and controlled spread of information.
+
+Optimized Memory Usage – FMM processes pixels in an ordered manner, reducing unnecessary computations and improving memory efficiency.
+
+## Comparison with other methods
+
+| Method                  | Filling Order   | Speed    | Edge Preservation | Complexity |
+|-------------------------|----------------|---------|------------------|------------|
+| **Basic Diffusion**     | Random         | Slow    | Poor             | High       |
+| **Convolution-based**   | Iterative      | Moderate | Moderate        | Medium     |
+| **FMM-based (Telea)**   | Priority Queue | Fast    | Strong          | Low        |
+
+Basic diffusion methods: Basic diffusion methods involve iteratively updating pixel values based on their neighbors, often leading to slow convergence and potential noise amplification. This approach does not prioritize which pixels to inpaint next, making it less efficient. It also tends to blur edges and details, which is not ideal for preserving lesion structures. 
+
+Convolution-based methods: Use fixed-size kernels to iteratively update pixel values in the image. These methods apply the kernel to the image at each step, effectively blending pixel values based on their neighbors. Convolution-based methods can be faster than basic diffusion howeber, they still suffer from edge blurring because they often treat all regions equally, including sharp transitions between colors or textures. This is not ideal when preserving lesion structures. Furthermore, these methods may require multiple iterations to produce satisfactory results, which increases the computational cost. The complexity of these methods are high, as each iteration requires repeated convolutions across the image.
+
 
 ## Why is TELEA a good choice for hair removal in skin lesion analysis?
 
