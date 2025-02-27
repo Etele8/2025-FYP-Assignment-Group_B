@@ -76,7 +76,7 @@ Basic diffusion methods: Basic diffusion methods involve iteratively updating pi
 
 Convolution-based methods: Use fixed-size kernels to iteratively update pixel values in the image. These methods apply the kernel to the image at each step, effectively blending pixel values based on their neighbors. Convolution-based methods can be faster than basic diffusion howeber, they still suffer from edge blurring because they often treat all regions equally, including sharp transitions between colors or textures. This is not ideal when preserving lesion structures. Furthermore, these methods may require multiple iterations to produce satisfactory results, which increases the computational cost. The complexity of these methods are high, as each iteration requires repeated convolutions across the image.
 
-## What makes TELEA (Fast Marching Method-based Inpainting superior to other methods?
+## What makes TELEA (Fast Marching Method-based Inpainting) superior to other methods?
 The FMM explicitly maintains a narrow band that separates the known from the unknown image area and specifies which pixel to inpaint next.
 
 Efficient Propagation – FMM efficiently propagates information outward from known regions to unknown regions, ensuring a smooth inpainting process.
