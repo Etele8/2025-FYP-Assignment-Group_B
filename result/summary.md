@@ -56,6 +56,18 @@ The dataset analysis shows that 43 images were annotated with 0 (no hair) by all
 
 ## TELEA method to remove the hair from picture
 
+ The TELEA algorithm is based on the paper “An Image Inpainting Technique based on the Fast Marching method” by Alexandru Telea in 2004. It is based on the Fast Marching Method (FMM), a solutional paradigm which builds a solution outwards starting from the “known information” of a problem and it is a numerical method created by James Sethian. 
+ 
+## How does TELEA work?
+The first step in any inpainting method is to identify the region to be inpainted. There is the region to be inpainted, also known as the unknown region, and the surrounding known region of the image. The algorithm first considers the boundary of the unknown region, and inpaints one pixel lying on the boundary. Then it iterates over all the pixels lying on the boundary to inpaint the whole boundary. 
+
+A single pixel is inpainted as a function of all other pixels lying in its known neighborhood by summing the estimates of all pixels, normalized by a weighting function. A weighting function is necessary as it ensures the inpainted pixel is influenced more by the pixels lying close to it and less by the pixels lying far away. After the boundary has been inpainted, the algorithm propagates forward towards the center of the unknown region. To implement the propagation, the Fast Marching Method (FMM) is used. FMM ensures the pixels near the known pixels are inpainted first, so that it mimics a manual inpainting technique. 
+
+## What is the advantage of using FMM in TELEA
+The FMM’s main advantage is that it explicitly maintains a narrow band that separates the known from the unknown image area and specifies which pixel to inpaint next.
+
+## Why is TELEA a good choice for hair removal in skin lesion analysis?
+
 The TELEA (Fast Marching Method-based Inpainting) algorithm is a good choice for hair removal/segmentation in skin lesion analysis for several reasons.
 The algorithm fills in the missing pixels by propagating information from the surrounding known pixels in a smooth manner. This is particularly effective in cases where hair partially covers the lesion, as it avoids introducing sharp discontinuities.
 Since hair strands are usually thin, removing them while preserving the underlying lesion structure is crucial. TELEA efficiently interpolates the missing values without distorting important lesion characteristics.
